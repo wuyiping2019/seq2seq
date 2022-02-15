@@ -3,7 +3,7 @@ import get_data
 import untils
 
 question_vocab, answer_vocab, question_tokens_ids, answer_tokens_ids = get_data.get_dataset()
-maxlen = 5
+maxlen = 10
 print('question_vocab:', len(question_vocab))
 print('answer_vocab:', len(answer_vocab))
 print('question_tokens_ids:', len(question_tokens_ids))
@@ -15,7 +15,7 @@ def label_smoothing(inputs, epsilon=0.1):
     return ((1 - epsilon) * inputs) + (epsilon / K)
 
 
-def generator(batch_size=32):
+def generator(batch_size=128):
     batch_num = len(question_tokens_ids) // batch_size
 
     while 1:
@@ -55,7 +55,7 @@ print(model.summary())
 model.compile(tf.optimizers.Adam(1e-4),
               tf.losses.categorical_crossentropy,
               metrics=["accuracy"])
-batch_size = 8
-model.load_weights("./saver/model")
-model.fit(generator(batch_size), steps_per_epoch=len(answer_tokens_ids) // batch_size, epochs=1000, verbose=2)
+batch_size = 128
+# model.load_weights("./saver/model")
+model.fit(generator(batch_size), steps_per_epoch=len(answer_tokens_ids) // batch_size, epochs=10, verbose=2)
 model.save_weights("./saver/model")

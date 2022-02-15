@@ -4,9 +4,9 @@ import numpy as np
 # embedding_size = 256
 # n_head = 8
 # n_layer = 3
-embedding_size = 4
-n_head = 4
-n_layer = 2
+embedding_size = 256
+n_head = 8
+n_layer = 3
 
 
 def splite_tensor(tensor):
