@@ -52,7 +52,7 @@ decoder_input = tf.keras.Input(shape=(None,))
 output = untils.Transformer(len(question_vocab), len(answer_vocab))([encoder_input, decoder_input])
 model = tf.keras.Model((encoder_input, decoder_input), output)
 print(model.summary())
-model.compile(tf.optimizers.Adam(1e-4),
+model.compile(tf.optimizers.Adam(1e-5),
               tf.losses.categorical_crossentropy,
               metrics=["accuracy"])
 batch_size = 16
